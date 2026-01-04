@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  # --- BACKEND ---
+  api:
+    build: ./foodapp  # <--- Aponta para a pasta do Java
+    container_name: foodapp-backend
+    ports:
+      - "8090:8090"
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      - SERVER_PORT=8090
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/fooddb?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+
+  # --- DATABASE ---
+  mysqldb:
+    image: mysql:8.0
+    container_name: foodapp-mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_DATABASE=fooddb
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # --- FRONTEND ---
+  web:
+    build: ./food-app-front  # <--- Aponta para a pasta do Next.js
+    container_name: foodapp-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      # O Navegador (no seu Windows) acessa o back pela porta 8090 do Windows
+      - NEXT_PUBLIC_API_URL=http://localhost:8090/api
+    depends_on:
+      - api
+
+volumes:
+  mysql_data:
+
+
+
+# Para rodar o Docker Compose: docker-compose up --build

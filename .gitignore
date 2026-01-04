@@ -1,0 +1,28 @@
+# Segurança (MUITO IMPORTANTE)
+.env
+.env.local
+*.pem
+*.key
+
+# Java / Spring Boot
+target/
+.mvn/
+mvnw
+mvnw.cmd
+.idea/
+*.class
+
+# Node.js / Next.js
+node_modules/
+.next/
+npm-debug.log
+yarn-error.log
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
