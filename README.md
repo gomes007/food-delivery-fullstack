@@ -2,7 +2,6 @@
 
 A comprehensive Food Delivery application built to simulate a real-world e-commerce scenario. This project demonstrates a complete software lifecycle, from the Backend API and Frontend Mobile-First design to automated Cloud Infrastructure deployment.
 
-![Project Banner](https://via.placeholder.com/1000x300?text=Food+App+Banner)
 ## 🚀 Key Features
 
 ### 📱 Client Side (Mobile First)
