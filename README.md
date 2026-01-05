@@ -104,4 +104,4 @@ This project was built consolidating knowledge from:
 Udemy: "Build & Deploy a Full-Stack Food Delivery App" (Backend & Frontend development).
 Data Science Academy: Infrastructure as Code (IaC) and Cloud Architecture.
 
-Made with by Paulo Gomes
+Made by Paulo Gomes
